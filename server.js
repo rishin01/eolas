@@ -3,6 +3,7 @@ const app = express()
 const http = require('http');
 const server = http.createServer(app);
 const pug = require('pug');
+var lensProtocol = require("lens-protocol");
 // const fs = require('fs');
 
 app.use(express.static('public'));
@@ -10,6 +11,12 @@ app.set('views', './views')
 app.set('view engine', 'pug');
 app.get('/', (req, res) => {
 	res.render('index');
+});
+
+lensProtocol.Lens.ping().then((res) => {
+	console.log(res);
+}).catch((err) => {
+	console.log(err);
 });
 
 function getdate(){
